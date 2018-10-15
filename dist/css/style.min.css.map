@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.scss"],"names":[],"mappings":"AAEA,KACI,sBACA,WACA,oBAAA,AAAa,oBAAb,AAAa,YAAA,CAChB","file":"style.min.css","sourcesContent":["@import 'abstract/_variables';\n\nbody{\n    background-color: $color-pink;\n    color: $color-red;\n    display: flex;\n}"]}
