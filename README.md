@@ -1,2 +1,2 @@
-# Simple website witha sass bem
+# Simple website with sass bem
 
