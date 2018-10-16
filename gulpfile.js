@@ -3,12 +3,25 @@ const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const prefix = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
+const browserSync = require('browser-sync').create();
+const reload = browserSync.reload;
 
-const cssDIST = './dist/css/';
-const cssSRC = './src/sass/style.scss';
+const styleDIST = './dist/css/';
+const styleSRC = 'src/sass/style.scss';
+const styleWatch = 'src/sass/**/*.scss';
 
-gulp.task('css', () => {
-    gulp.src( cssSRC )
+const htmlWatch = '**/*.html';
+
+gulp.task('serve', () => {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
+    })
+});
+
+gulp.task('style', () => {
+    gulp.src( styleSRC )
         .pipe( sourcemaps.init())
         .pipe( sass({
             errLogToConsole: true,
@@ -18,5 +31,14 @@ gulp.task('css', () => {
         .pipe( prefix({ browsers: ['last 2 versions'], cascade: false }))
         .pipe( rename( { suffix: '.min' } ) )
         .pipe( sourcemaps.write('./'))
-        .pipe( gulp.dest( cssDIST ))
+        .pipe( gulp.dest( styleDIST ))
+        .pipe( browserSync.stream() );
+});
+
+gulp.task('default', ['style']);
+
+gulp.task('watch', ['default', 'serve'], () => {
+    gulp.watch( styleWatch, ['style', reload] );
+    gulp.watch( htmlWatch, reload )
 })
+

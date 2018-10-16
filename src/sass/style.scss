@@ -1,7 +1,16 @@
 @import 'abstract/_variables';
 
+
 body{
     background-color: $color-pink;
     color: $color-red;
-    display: flex;
+    
+
+    .flexbox{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 }
