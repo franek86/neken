@@ -5,19 +5,25 @@ const prefix = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
+const htmlMin = require('gulp-htmlmin');
 
 const styleDIST = './dist/css/';
 const styleSRC = 'src/sass/style.scss';
 const styleWatch = 'src/sass/**/*.scss';
 
-const htmlWatch = '**/*.html';
+const htmlWatch = './*.html';
 
-gulp.task('serve', () => {
+
+gulp.task('serve', ['style'],() => {
     browserSync.init({
         server: {
-            baseDir: "./"
+            baseDir: "./dist"
         }
-    })
+    });
+
+    gulp.watch( styleWatch, ['style', reload] );
+    gulp.watch( htmlWatch ).on('change', browserSync.reload);
+    gulp.watch('./*.html', ['html']);
 });
 
 gulp.task('style', () => {
@@ -35,10 +41,18 @@ gulp.task('style', () => {
         .pipe( browserSync.stream() );
 });
 
-gulp.task('default', ['style']);
+gulp.task('html', () => {
+    gulp.src(htmlWatch)
+        .pipe(htmlMin( 
+            {collapseWhitespace: true}
+         ))
+        .pipe(gulp.dest('dist'))
+});
+
+/* gulp.task('default', ['style']);
 
 gulp.task('watch', ['default', 'serve'], () => {
     gulp.watch( styleWatch, ['style', reload] );
     gulp.watch( htmlWatch, reload )
-})
+}) */
 
