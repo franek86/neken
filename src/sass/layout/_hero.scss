@@ -17,12 +17,12 @@
 
     &__logo{
         &--path{
-            stroke: $color-secondary;
+            stroke: $color-third-dark;
             stroke-width: 1px;
             stroke-dasharray: 1066.12451171875;
             //stroke-dashoffset: -1066.12451171875;
             animation: logoDashAnim 10s linear;
-            fill: transparent;
+            /* fill: transparent; */
         }
     }
 
