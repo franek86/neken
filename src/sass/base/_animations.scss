@@ -1,0 +1,14 @@
+@keyframes logoDashAnim {
+    0%{
+        stroke-dasharray: 0;
+        opacity: 0;
+    }
+
+    50%{
+        opacity: 1;
+    }
+
+    100%{
+        stroke-dasharray: 1066.12451171875;
+    }
+}

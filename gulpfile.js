@@ -6,15 +6,17 @@ const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
 const htmlMin = require('gulp-htmlmin');
+const imageMin = require('gulp-imagemin');
 
 const styleDIST = './dist/css/';
 const styleSRC = 'src/sass/style.scss';
 const styleWatch = 'src/sass/**/*.scss';
+const imageSRC = 'src/img/*'
 
 const htmlWatch = './*.html';
 
 
-gulp.task('serve', ['style'],() => {
+gulp.task('serve', ['style', 'image'],() => {
     browserSync.init({
         server: {
             baseDir: "./dist"
@@ -23,7 +25,7 @@ gulp.task('serve', ['style'],() => {
 
     gulp.watch( styleWatch, ['style', reload] );
     gulp.watch( htmlWatch ).on('change', browserSync.reload);
-    gulp.watch('./*.html', ['html']);
+    gulp.watch( './*.html', ['html']);
 });
 
 gulp.task('style', () => {
@@ -39,6 +41,12 @@ gulp.task('style', () => {
         .pipe( sourcemaps.write('./'))
         .pipe( gulp.dest( styleDIST ))
         .pipe( browserSync.stream() );
+});
+
+gulp.task('image', () => {
+    gulp.src( imageSRC )
+        .pipe( imageMin() )
+        .pipe(gulp.dest('dist/img'))
 });
 
 gulp.task('html', () => {

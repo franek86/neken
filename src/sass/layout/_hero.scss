@@ -1,0 +1,37 @@
+.hero{
+    height: 100vh;
+    background-image: linear-gradient(to right bottom, rgba($color-primary-dark, 0.8), rgba($color-primary-light, 0.8)), url('../img/hero_image.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+
+    clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
+
+    &__logo--box{
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+    }
+
+    &__logo{
+        &--path{
+            stroke: $color-secondary;
+            stroke-width: 1px;
+            stroke-dasharray: 1066.12451171875;
+            //stroke-dashoffset: -1066.12451171875;
+            animation: logoDashAnim 10s linear;
+            fill: transparent;
+        }
+    }
+
+    &__text{
+        position: absolute;
+        top: 40%;
+        left: 50%; 
+        transform: translate(-50%, -50%);
+        text-align: center;
+        
+    }
+}
